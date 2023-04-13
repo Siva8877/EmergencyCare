@@ -1,0 +1,60 @@
+{
+    "data": [
+    {
+      "id": 1000,
+      "name": "James Butt",
+      "age":32,
+      "contactNo" : "9876567890",
+      "medicalDetails": {
+        "bloodGroup": "B+",
+        "bloodPressure":"120/80",
+        "heartRate":"85",
+        "respiratoryRate":"18",
+        "temperature":"98.6",
+        "oxyGenSaturation":"98"
+      }
+    },
+    {
+      "id": 1001,
+      "name": "Johnson",
+      "age":30,
+      "contactNo" : "9876567891",
+      "medicalDetails": {
+        "bloodGroup": "A+",
+        "bloodPressure":"120/80",
+        "heartRate":"88",
+        "respiratoryRate":"20",
+        "temperature":"99",
+        "oxyGenSaturation":"96"
+      }
+    },
+    {
+      "id": 1002,
+      "name": "Aney",
+      "age":28,
+      "contactNo" : "9876567892",
+      "medicalDetails": {
+        "bloodGroup": "AB+",
+        "bloodPressure":"120/80",
+        "heartRate":"82",
+        "respiratoryRate":"21",
+        "temperature":"97",
+        "oxyGenSaturation":"90"
+      }
+    },
+    {
+      "id": 1003,
+      "name": "Edan",
+      "age":26,
+      "contactNo" : "9876567893",
+      "medicalDetails": {
+        "bloodGroup": "O+",
+        "bloodPressure":"120/80",
+        "heartRate":"80",
+        "respiratoryRate":"27",
+        "temperature":"99",
+        "oxyGenSaturation":"91"
+      }
+    }
+  ]
+}

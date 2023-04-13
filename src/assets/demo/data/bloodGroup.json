@@ -1,0 +1,28 @@
+{
+    "data":[
+        {
+            "itemId": 1001,
+            "bloodGroup": "A+"
+        },
+        {
+            "itemId": 1002,
+            "bloodGroup": "B+"
+        },
+        {
+            "itemId": 1003,
+            "bloodGroup": "O+"
+        },
+        {
+            "itemId": 1004,
+            "bloodGroup": "AB+"
+        },
+        {
+            "itemId": 1005,
+            "bloodGroup": "AB-"
+        },
+        {
+            "itemId": 1006,
+            "bloodGroup": "B-"
+        }
+    ]
+}

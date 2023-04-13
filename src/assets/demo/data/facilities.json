@@ -1,0 +1,28 @@
+{
+    "data":[
+        {
+            "itemId": 1001,
+            "facilityName": "Electrosurgical Unit (ESU)"
+        },
+        {
+            "itemId": 1002,
+            "facilityName": "Defibrillator"
+        },
+        {
+            "itemId": 1003,
+            "facilityName": "Cautery Machine"
+        },
+        {
+            "itemId": 1004,
+            "facilityName": "Suturing and Stapling Devices"
+        },
+        {
+            "itemId": 1005,
+            "facilityName": "X-ray and Imaging Equipment"
+        },
+        {
+            "itemId": 1006,
+            "facilityName": "Hemodynamic Monitoring Equipment"
+        }
+    ]
+}

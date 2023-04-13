@@ -1,0 +1,172 @@
+    <div class="grid"><div class="col-12">
+ 
+		<div class="card">
+			<h5>Patient List</h5>
+			<p-table #dt1 [value]="patientDataList" dataKey="id" [rows]="10" [loading]="loading" [rowHover]="true" styleClass="p-datatable-gridlines" [paginator]="true" [globalFilterFields]="['name','age','contactNo','medicalDetails.bloodGroup']" responsiveLayout="scroll">
+				<ng-template pTemplate="caption">
+					<div class="flex justify-content-between flex-column sm:flex-row">
+						<button pButton label="Clear" class="p-button-outlined mb-2" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+						<span class="p-input-icon-left mb-2">
+							<i class="pi pi-search"></i>
+							<input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)" placeholder="Search Keyword" class="w-full"/>
+						</span>
+					</div>
+				</ng-template>
+				<ng-template pTemplate="header">
+					<tr>
+						<th style="min-width: 12rem" pSortableColumn="name">
+							<div class="flex justify-content-between align-items-center">
+								Name
+                                <p-sortIcon field="name"></p-sortIcon>
+								<p-columnFilter type="text" field="name" display="menu" placeholder="Search by name"></p-columnFilter>
+							</div>
+						</th>
+                        <th style="min-width: 12rem" pSortableColumn="age">
+							<div class="flex justify-content-between align-items-center">
+								Age
+                                <p-sortIcon field="age"></p-sortIcon>
+                                <p-columnFilter field="age" matchMode="between" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                                    <ng-template pTemplate="filter" let-filter="filterCallback">
+                                        <p-slider [ngModel]="activityValues" [range]="true" (onSlideEnd)="filter($event.values)" styleClass="m-3" [style]="{'min-width': '12rem'}" ></p-slider>
+                                        <div class="flex align-items-center justify-content-between px-2">
+                                            <span>{{activityValues[0]}}</span>
+                                            <span>{{activityValues[1]}}</span>
+                                        </div>
+                                    </ng-template>
+                                </p-columnFilter>
+							</div>
+						</th>
+                        <th style="min-width: 12rem" >
+							<div class="flex justify-content-between align-items-center">
+								ContactNo
+								<p-columnFilter type="text" field="contactNo" display="menu" placeholder="Search by contactNo"></p-columnFilter>
+							</div>
+						</th>
+                        <th style="min-width: 12rem" pSortableColumn="medicalDetails.bloodGroup">
+							<div class="flex justify-content-between align-items-center">
+								Blood Group
+                                <p-sortIcon field="medicalDetails.bloodGroup"></p-sortIcon>
+								<p-columnFilter type="text" field="medicalDetails.bloodGroup" display="menu" placeholder="Search by BloodGroup"></p-columnFilter>
+							</div>
+						</th>
+                        <th style="min-width: 12rem" pSortableColumn="medicalDetails.bloodPressure">
+							<div class="flex justify-content-between align-items-center">
+								Blood Pressure (in mmHg)
+                                <p-sortIcon field="medicalDetails.bloodPressure"></p-sortIcon>
+							</div>
+						</th>
+                        <th style="min-width: 12rem" pSortableColumn="medicalDetails.heartRate">
+							<div class="flex justify-content-between align-items-center">
+								Heart Rate (in bpm)
+                                <p-sortIcon field="medicalDetails.heartRate"></p-sortIcon>
+                                <p-columnFilter field="medicalDetails.heartRate" matchMode="between" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                                    <ng-template pTemplate="filter" let-filter="filterCallback">
+                                        <p-slider [ngModel]="heartBeatValue" [range]="true" [min]="30" [max]="150" [step]="5" (onSlideEnd)="filter($event.values)" styleClass="m-3" [style]="{'min-width': '12rem'}" ></p-slider>
+                                        <div class="flex align-items-center justify-content-between px-2">
+                                            <span>{{heartBeatValue[0]}}</span>
+                                            <span>{{heartBeatValue[1]}}</span>
+                                        </div>
+                                    </ng-template>
+                                </p-columnFilter>
+							</div>
+						</th>
+                        <th style="min-width: 12rem" pSortableColumn="medicalDetails.respiratoryRate">
+							<div class="flex justify-content-between align-items-center">
+								Respiratory Rate (in bpm)
+                                <p-sortIcon field="medicalDetails.respiratoryRate"></p-sortIcon>
+                                <p-columnFilter field="medicalDetails.respiratoryRate" matchMode="between" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                                    <ng-template pTemplate="filter" let-filter="filterCallback">
+                                        <p-slider [ngModel]="respRateValue" [range]="true" [min]="5" [max]="30" [step]="1" (onSlideEnd)="filter($event.values)" styleClass="m-3" [style]="{'min-width': '12rem'}" ></p-slider>
+                                        <div class="flex align-items-center justify-content-between px-2">
+                                            <span>{{respRateValue[0]}}</span>
+                                            <span>{{respRateValue[1]}}</span>
+                                        </div>
+                                    </ng-template>
+                                </p-columnFilter>
+							</div>
+						</th>
+                        <th style="min-width: 12rem" pSortableColumn="medicalDetails.temperature">
+							<div class="flex justify-content-between align-items-center">
+								Temperature (in *F)
+                                <p-sortIcon field="medicalDetails.temperature"></p-sortIcon>
+                                <p-columnFilter field="medicalDetails.temperature" matchMode="between" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                                    <ng-template pTemplate="filter" let-filter="filterCallback">
+                                        <p-slider [ngModel]="tempratureValue" [range]="true" [min]="90" [max]="110" [step]="0.5" (onSlideEnd)="filter($event.values)" styleClass="m-3" [style]="{'min-width': '12rem'}" ></p-slider>
+                                        <div class="flex align-items-center justify-content-between px-2">
+                                            <span>{{tempratureValue[0]}}</span>
+                                            <span>{{tempratureValue[1]}}</span>
+                                        </div>
+                                    </ng-template>
+                                </p-columnFilter>
+							</div>
+						</th>
+                        <th style="min-width: 12rem" pSortableColumn="medicalDetails.oxyGenSaturation">
+							<div class="flex justify-content-between align-items-center">
+							Oxygen Saturation (in %)
+                                <p-sortIcon field="medicalDetails.oxyGenSaturation"></p-sortIcon>
+                                <p-columnFilter field="medicalDetails.oxyGenSaturation" matchMode="between" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                                    <ng-template pTemplate="filter" let-filter="filterCallback">
+                                        <p-slider [ngModel]="oxygenRateValue" [range]="true" [min]="5" [max]="30" [step]="1" (onSlideEnd)="filter($event.values)" styleClass="m-3" [style]="{'min-width': '12rem'}" ></p-slider>
+                                        <div class="flex align-items-center justify-content-between px-2">
+                                            <span>{{oxygenRateValue[0]}}</span>
+                                            <span>{{oxygenRateValue[1]}}</span>
+                                        </div>
+                                    </ng-template>
+                                </p-columnFilter>
+							</div>
+						</th>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="body" let-patient>
+					<tr>
+						<td>
+							{{patient.name}}
+						</td>
+                        <td>
+							{{patient.age}}
+						</td>
+                        <td>
+							{{patient.contactNo}}
+						</td>
+                        <td>
+							{{patient.medicalDetails.bloodGroup}}
+						</td>
+                        <td>
+							{{patient.medicalDetails.bloodPressure}}
+						</td>
+                        <td>
+							{{patient.medicalDetails.heartRate}}
+						</td>
+                        <td>
+							{{patient.medicalDetails.respiratoryRate}}
+						</td>
+                        <td>
+							{{patient.medicalDetails.temperature}}
+						</td>
+                        <td>
+							{{patient.medicalDetails.oxyGenSaturation}}
+						</td>
+					</tr>
+                    
+				</ng-template>
+
+                
+
+               
+				<ng-template pTemplate="emptymessage">
+					<tr>
+						<td colspan="8">No Patient found.</td>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="loadingbody">
+					<tr>
+						<td colspan="8">Loading Patient data. Please wait.</td>
+					</tr>
+				</ng-template>
+    		</p-table>
+		</div>
+
+	</div>
+</div>
+
+
