@@ -1,0 +1,71 @@
+[{
+	"name": "HospitalA",
+	"contactNo": "1112223334",
+	"address": "HospitalA",
+	"facilities": {
+		"organAvailability": [{
+			"bloodGroup": "B+",
+			"donorAge": "30",
+			"heartWeight": "265"
+		}, {
+			"bloodGroup": "A+",
+			"donorAge": "40",
+			"heartWeight": "285"
+		}, {
+			"bloodGroup": "O+",
+			"donorAge": "35",
+			"heartWeight": "275"
+		},{
+            "bloodGroup": "B+",
+            "donorAge": "30",
+            "liverSize": "11",
+            "liverWeight": "1200"
+        }, {
+            "bloodGroup": "A+",
+            "donorAge": "40",
+            "liverSize": "10",
+            "liverWeight": "1300"
+        }, {
+            "bloodGroup": "O+",
+            "donorAge": "35",
+            "liverSize": "9",
+            "liverWeight": "1100"
+        }]
+	},
+	"hospitalId": "1001"
+}, {
+	"name": "HopsitalB",
+	"contactNo": "1112223344",
+	"address": "HospitalB",
+	"facilities": {
+		"organAvailability": [{
+			"bloodGroup": "B-",
+			"donorAge": "34",
+			"heartWeight": "280"
+		}, {
+			"bloodGroup": "A+",
+			"donorAge": "40",
+			"heartWeight": "285"
+		}, {
+			"bloodGroup": "O-",
+			"donorAge": "24",
+			"heartWeight": "265"
+		},{
+            "bloodGroup": "B-",
+            "donorAge": "34",
+            "liverSize": "8",
+            "liverWeight": "1420"
+        }, {
+            "bloodGroup": "A+",
+            "donorAge": "40",
+            "liverSize": "10",
+            "liverWeight": "1300"
+        }, {
+            "bloodGroup": "O-",
+            "donorAge": "24",
+            "liverSize": "6",
+            "liverWeight": "1327"
+        }]
+	},
+	"hospitalId": "1002"
+}]

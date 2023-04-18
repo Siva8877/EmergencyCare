@@ -8,7 +8,7 @@
         </p-toolbar> -->
 		<div class="card">
 			<h5>Hospital List</h5>
-			<p-table #dt1 [value]="hospitalDataList" dataKey="id" [rows]="10" [loading]="loading" [rowHover]="true" styleClass="p-datatable-gridlines" [paginator]="true" [globalFilterFields]="['name','hospitalDataList.name','representative.name','status','contactNo','address','facilities[0].facilityName']" responsiveLayout="scroll">
+			<p-table #dt1 [value]="hospitalDataList" dataKey="hospitalId" [rows]="10" [loading]="loading" [rowHover]="true" styleClass="p-datatable-gridlines" [paginator]="true" [globalFilterFields]="['name','hospitalDataList.name','contactNo','address']" responsiveLayout="scroll">
 				<ng-template pTemplate="caption">
 					<div class="flex justify-content-between flex-column sm:flex-row">
 						<button pButton label="Clear" class="p-button-outlined mb-2" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
@@ -95,17 +95,17 @@
 						</td>
                         <td>
 							{{hospital.address}}
-						</td>
+                        </td>
                         <td>
-							{{hospital.emergencyBed}}
-						</td>
+                            {{hospital.facilities.emergencyBed}}
+                        </td>
                         <td>
-                            <ng-container *ngFor="let facility of hospital.facilities; let i = index">
+                            <ng-container *ngFor="let facility of hospital.facilities.devicesAvailability; let i = index">
                                 <ng-container *ngIf="i !== 0">, </ng-container>
                                 <span class="image-text ml-2">{{facility.facilityName}}</span>
-                              </ng-container>
-
-						</td>
+                            </ng-container>
+                        
+                        </td>
                         <td>
 							<button type="button" pButton pRipple [pRowToggler]="hospital" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
 						</td>
@@ -119,7 +119,7 @@
 
 
                 <ng-template pTemplate="rowexpansion" let-hospital>
-                    <p-table [value]="hospital.bloodAvailability" dataKey="itemId" responsiveLayout="scroll">
+                    <p-table [value]="hospital.facilities.bloodAvailability" dataKey="itemId" responsiveLayout="scroll">
                         <ng-template pTemplate="header">
                             <tr>
                                 <th pSortableColumn="bloodGroup">BloodGroup <p-sortIcon field="bloodGroup"></p-sortIcon>

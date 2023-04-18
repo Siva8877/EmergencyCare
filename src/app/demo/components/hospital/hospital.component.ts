@@ -47,9 +47,9 @@ export class HospitalComponent implements OnInit, OnDestroy {
             this.loading = false;
         });
 
-        this.hospitalService.getHospitals().then(hospitalData => {
-            this.hospitalDataListData = hospitalData;
-            this.hospitalDataList = hospitalData.data;
+        this.hospitalService.getHospitalsV1().then(hospitalData => {
+            // this.hospitalDataListData = hospitalData;
+            this.hospitalDataList = hospitalData;
             this.loading = false;
         });
         

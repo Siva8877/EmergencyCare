@@ -11,7 +11,7 @@ import { Table } from 'primeng/table';
 export class BloodAvailabilityComponent implements OnInit, OnDestroy {
 
     loading: boolean = true;
-    hospitalDataList: Hospital[] = [];
+    hospitalBloodDataList: Hospital[] = [];
     bloodAvailabilityList : any[] = [];
     activityValues: number[] = [0, 100];
     tempratureValue: number[] = [90, 110];
@@ -24,16 +24,16 @@ export class BloodAvailabilityComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.hospitalService.getHospitals().then(hospitalData => {
-            this.hospitalDataList = hospitalData.data;
+        this.hospitalService.getBloodAvailabilityList().then(hosBloodData => {
+            this.hospitalBloodDataList = hosBloodData;
             this.bloodAvailabilityList = [];
             this.loading = false;
-            if (this.hospitalDataList && Array.isArray(this.hospitalDataList)
-                && this.hospitalDataList.length) {
-                this.hospitalDataList.forEach(hospitalData => {
-                    if (hospitalData.bloodAvailability && Array.isArray(hospitalData.bloodAvailability)
-                        && hospitalData.bloodAvailability.length) {
-                        const hospitalMapData = hospitalData.bloodAvailability.map(bloodData => {
+            if (this.hospitalBloodDataList && Array.isArray(this.hospitalBloodDataList)
+                && this.hospitalBloodDataList.length) {
+                this.hospitalBloodDataList.forEach(hospitalData => {
+                    if (hospitalData.facilities && hospitalData.facilities.bloodAvailability && Array.isArray(hospitalData.facilities.bloodAvailability)
+                        && hospitalData.facilities.bloodAvailability.length) {
+                        const hospitalMapData = hospitalData.facilities.bloodAvailability.map(bloodData => {
                             bloodData['hospitalName'] = hospitalData.name;
                             return bloodData
                         })
@@ -41,11 +41,8 @@ export class BloodAvailabilityComponent implements OnInit, OnDestroy {
                             this.bloodAvailabilityList = this.bloodAvailabilityList.concat(hospitalMapData);
                         }
                     }
-
                 });
-
             }
-
         });
     }
 

@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Hospital } from '../api/hospital';
 
 @Injectable()
 export class HospitalService {
@@ -12,10 +11,24 @@ export class HospitalService {
             .toPromise()
             .then(res => res);
     }
+
+    getHospitalsV1() {
+        return this.http.get<any>('assets/demo/data/hospitalsv1.json')
+            .toPromise()
+            .then(res => res);
+    }
+
+
     getBloodAvailabilityList() {
         return this.http.get<any>('assets/demo/data/bloodAvailabilityData.json')
             .toPromise()
-            .then(res => res.date);
+            .then(res => res);
+    }
+
+    getOrganAvailabilityList() {
+        return this.http.get<any>('assets/demo/data/organAvailability.json')
+            .toPromise()
+            .then(res => res);
     }
     
 }

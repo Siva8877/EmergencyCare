@@ -1,0 +1,122 @@
+[{
+	"name": "HospitalA",
+	"contactNo": "1112223334",
+	"address": "HospitalA",
+	"facilities": {
+        "emergencyBed" : 10,
+		"devicesAvailability": [{
+			"itemId": 1001,
+			"facilityName": "Electrosurgical Unit (ESU)"
+		}, {
+			"itemId": 1002,
+			"facilityName": "Defibrillator"
+		}, {
+			"itemId": 1003,
+			"facilityName": "Cautery Machine"
+		}, {
+			"itemId": 1004,
+			"facilityName": "Suturing and Stapling Devices"
+		}],
+		"bloodAvailability": [{
+			"itemId": 1001,
+			"bloodGroupId": 1001,
+			"bloodGroup": "A+",
+			"hospitalId": "1001",
+			"AvailableUnit": 10
+		}, {
+			"itemId": 1002,
+			"bloodGroupId": 1002,
+			"bloodGroup": "B+",
+			"hospitalId": "1001",
+			"AvailableUnit": 12
+		}, {
+			"itemId": 1003,
+			"bloodGroupId": 1003,
+			"bloodGroup": "O+",
+			"hospitalId": "1001",
+			"AvailableUnit": 15
+		}],
+		"organAvailability": [{
+			"itemId": 1001,
+			"bloodGroup": "B+",
+			"donorAge": "30",
+			"liverSize": "11",
+			"liverWeight": "1200",
+			"heartWeight": "265"
+		}, {
+			"itemId": 1002,
+			"bloodGroup": "A+",
+			"donorAge": "40",
+			"liverSize": "10",
+			"liverWeight": "1300",
+			"heartWeight": "285"
+		}, {
+			"itemId": 1003,
+			"bloodGroup": "O+",
+			"donorAge": "35",
+			"liverSize": "9",
+			"liverWeight": "1100",
+			"heartWeight": "275"
+		}]
+	},
+	"hospitalId": "1001"
+}, {
+	"name": "HopsitalB",
+	"contactNo": "1112223344",
+	"address": "HospitalB",
+	"facilities": {
+        "emergencyBed" : 12,
+		"devicesAvailability": [{
+			"itemId": 1002,
+			"facilityName": "Defibrillator"
+		}, {
+			"itemId": 1003,
+			"facilityName": "Cautery Machine"
+		}, {
+			"itemId": 1004,
+			"facilityName": "Suturing and Stapling Devices"
+		}],
+		"bloodAvailability": [{
+			"itemId": 1001,
+			"bloodGroupId": 1001,
+			"bloodGroup": "A-",
+			"hospitalId": "1002",
+			"AvailableUnit": 10
+		}, {
+			"itemId": 1002,
+			"bloodGroupId": 1002,
+			"bloodGroup": "B-",
+			"hospitalId": "1002",
+			"AvailableUnit": 4
+		}, {
+			"itemId": 1003,
+			"bloodGroupId": 1003,
+			"bloodGroup": "O-",
+			"hospitalId": "1002",
+			"AvailableUnit": 3
+		}],
+		"organAvailability": [{
+			"itemId": 1001,
+			"bloodGroup": "B-",
+			"donorAge": "34",
+			"liverSize": "8",
+			"liverWeight": "1420",
+			"heartWeight": "280"
+		}, {
+			"itemId": 1002,
+			"bloodGroup": "A+",
+			"donorAge": "40",
+			"liverSize": "10",
+			"liverWeight": "1300",
+			"heartWeight": "285"
+		}, {
+			"itemId": 1003,
+			"bloodGroup": "O-",
+			"donorAge": "24",
+			"liverSize": "6",
+			"liverWeight": "1327",
+			"heartWeight": "265"
+		}]
+	},
+	"hospitalId": "1002"
+}]

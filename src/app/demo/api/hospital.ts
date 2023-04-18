@@ -1,7 +1,15 @@
-export interface Facilities {
+export interface DevicesAvailability {
     itemId: number;
     facilityName: string;
 }
+
+export interface Facilities {
+    emergencyBed: number,
+    bloodAvailability?: BloodAvailability[],
+    organAvailability?: OrganAvailability[],
+    devicesAvailability?: DevicesAvailability[]
+}
+
 export interface BloodAvailability {
     itemId: number;
     bloodGroupId: number;
@@ -27,7 +35,5 @@ export interface Hospital {
     contactNo? : string;
     address?: string;
     emergencyBed?: number;
-    facilities?: Facilities[];
-    bloodAvailability? : BloodAvailability[],
-    organAvailability? : OrganAvailability[]
+    facilities?: Facilities;
 }

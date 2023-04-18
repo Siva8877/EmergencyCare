@@ -1,5 +1,35 @@
-{
-    "data":[
-       
-    ]
-}
+[{
+	"name": "HospitalA",
+	"contactNo": "1112223334",
+	"address": "HospitalA",
+	"facilities": {
+		"bloodAvailability": [{
+			"bloodGroup": "A+",
+			"AvailableUnit": 10
+		}, {
+			"bloodGroup": "B+",
+			"AvailableUnit": 12
+		}, {
+			"bloodGroup": "O+",
+			"AvailableUnit": 15
+		}]
+	},
+	"hospitalId": "1001"
+}, {
+	"name": "HopsitalB",
+	"contactNo": "1112223344",
+	"address": "HospitalB",
+	"facilities": {
+		"bloodAvailability": [{
+			"bloodGroup": "A-",
+			"AvailableUnit": 10
+		}, {
+			"bloodGroup": "B-",
+			"AvailableUnit": 4
+		}, {
+			"bloodGroup": "O-",
+			"AvailableUnit": 3
+		}]
+	},
+	"hospitalId": "1002"
+}]

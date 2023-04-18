@@ -13,9 +13,10 @@ export interface MedicalDetails {
 }
 
 export interface Patient {
-    id?: number;
+    patientId?: number;
     name?: string;
     age?: number;
+    hospitalId?: number;
     contactNo?: string;
     medicalDetails?: MedicalDetails;
 }

@@ -10,7 +10,7 @@ export class PatientService {
     getPatients() {
         return this.http.get<any>('assets/demo/data/patients.json')
             .toPromise()
-            .then(res => res.data as Patient[])
+            .then(res => res as Patient[])
             .then(data => data);
     }
     
