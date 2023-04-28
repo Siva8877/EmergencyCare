@@ -48,7 +48,7 @@
     "patientId": 1003,
     "name": "Edan",
     "age":26,
-    "hospitalId": 1003,
+    "hospitalId": 1001,
     "contactNo" : "9876567893",
     "medicalDetails": {
       "bloodGroup": "O+",

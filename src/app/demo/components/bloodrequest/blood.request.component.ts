@@ -4,7 +4,7 @@ import { BloodAvailability,Hospital } from 'src/app/demo/api/hospital';
 
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { Table } from 'primeng/table';
-
+import { Router } from '@angular/router';
 @Component({
     templateUrl: './blood.request.component.html',
 })
@@ -27,14 +27,26 @@ export class BloodRequestComponent implements OnInit, OnDestroy {
     heartBeatValue: number[] = [30, 150];
     respRateValue: number[] = [5, 30];
     oxygenRateValue: number[] = [50, 150];
+    hospitalId = '';
     @ViewChild('filter') filter!: ElementRef;
-    constructor(private hospitalService: HospitalService,public layoutService: LayoutService) {
-    
+    constructor(private hospitalService: HospitalService, public layoutService: LayoutService,
+        private router: Router) {
+        if (localStorage.getItem('userId') && localStorage.getItem('role') === 'admin' && localStorage.getItem('hospitalId')) {
+            this.hospitalId = localStorage.getItem('hospitalId') || '';
+        } else if (localStorage.getItem('userId') && localStorage.getItem('role') === 'superadmin') {
+            this.hospitalId = '';
+        } else {
+            localStorage.setItem('userId', '');
+            localStorage.setItem('password', '');
+            localStorage.setItem('role', '');
+            localStorage.setItem('name', '');
+            this.router.navigate(['/login']);
+        }
     }
 
     ngOnInit() {
 
-        this.hospitalService.getBloodRequestList().then(bloodReqData => {
+        this.hospitalService.getBloodRequestList(this.hospitalId).then(bloodReqData => {
             this.bloodRequestData = bloodReqData;
             this.bloodAvailabilityList = [];
             this.loading = false;

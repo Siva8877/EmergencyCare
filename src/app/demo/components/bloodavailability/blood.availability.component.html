@@ -48,7 +48,8 @@
                         <td>
 							{{bloodAvailability.AvailableUnit}}
 						</td>
-						<td><p-button type="button" (onClick) = "onRequestClick(bloodAvailability)">Send Request</p-button></td>
+						<td><p-button type="button" *ngIf="bloodAvailability.hospitalId !== hospitalId"
+								(onClick)="onRequestClick(bloodAvailability)">Send Request</p-button></td>
 					</tr>
                     
 				</ng-template>

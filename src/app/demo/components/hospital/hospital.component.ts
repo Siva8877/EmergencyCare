@@ -6,7 +6,7 @@ import { MasterService } from 'src/app/demo/service/master.service';
 import { HospitalService } from 'src/app/demo/service/hospital.service';
 import { Product } from 'src/app/demo/api/product';
 import { Hospital,BloodAvailability } from 'src/app/demo/api/hospital';
-
+import { Router } from '@angular/router';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { Table } from 'primeng/table';
 
@@ -18,19 +18,30 @@ export class HospitalComponent implements OnInit, OnDestroy {
     customers1: Customer[] = [];
     selectedCustomers1: Customer[] = [];
     loading: boolean = true;
-    newHospitalDialog : boolean = false;
+    newHospitalDialog: boolean = false;
     representatives: Representative[] = [];
     facilityMaster: FacilityMaster[] = [];
     hospitalDataList: Hospital[] = [];
     hospitalDataListData: any = {};
     statuses: any[] = [];
-    hospitalData : Hospital = {};
+    hospitalData: Hospital = {};
     submitted: boolean = false;
     activityValues: number[] = [0, 100];
-    routeItems : any[] = [];
+    routeItems: any[] = [];
+    hospitalId = '';
     @ViewChild('filter') filter!: ElementRef;
-    constructor(private hospitalService: HospitalService, private masterService : MasterService,private customerService: CustomerService,public layoutService: LayoutService) {
-    
+    constructor(private hospitalService: HospitalService, private masterService: MasterService, private customerService: CustomerService, public layoutService: LayoutService, private router: Router) {
+        if (localStorage.getItem('userId') && localStorage.getItem('role') === 'admin' && localStorage.getItem('hospitalId')) {
+            this.hospitalId = localStorage.getItem('hospitalId') || '';
+        } else if (localStorage.getItem('userId') && localStorage.getItem('role') === 'superadmin') {
+            this.hospitalId = '';
+        } else {
+            localStorage.setItem('userId', '');
+            localStorage.setItem('password', '');
+            localStorage.setItem('role', '');
+            localStorage.setItem('name', '');
+            this.router.navigate(['/login']);
+        }
     }
 
     ngOnInit() {
@@ -47,7 +58,7 @@ export class HospitalComponent implements OnInit, OnDestroy {
             this.loading = false;
         });
 
-        this.hospitalService.getHospitalsV1().then(hospitalData => {
+        this.hospitalService.getHospitalsV1(this.hospitalId).then(hospitalData => {
             // this.hospitalDataListData = hospitalData;
             this.hospitalDataList = hospitalData;
             this.loading = false;

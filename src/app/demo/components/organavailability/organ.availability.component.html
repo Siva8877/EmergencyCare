@@ -138,7 +138,7 @@
 						<td *ngIf="selectedOrgan === 'ALL' || selectedOrgan === 'Heart'">
 							{{donorAvailability.heartWeight || 'NA'}}
 						</td>
-						<td><p-button type="button" (onClick) = "onRequestClick(donorAvailability)">Send Request</p-button></td>
+						<td><p-button type="button" *ngIf="donorAvailability.hospitalId !== hospitalId" (onClick)="onRequestClick(donorAvailability)">Send Request</p-button></td>
 					</tr>
 
 				</ng-template>

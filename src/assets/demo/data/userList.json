@@ -1,0 +1,23 @@
+[
+    {
+        "userid": "superadmin",
+        "name": "superadmin",
+        "password": "superadmin",
+        "role": "superadmin",
+        "hospitalId": "0"
+    },
+    {
+        "userid": "hospitalAAdmin",
+        "name": "hospitalAAdmin",
+        "password": "admin@12345",
+        "role": "admin",
+        "hospitalId": "1001"
+    },
+    {
+        "userid": "hospitalb",
+        "name": "Hospital B",
+        "password": "admin@12345",
+        "role": "admin",
+        "hospitalId": "1002"
+    }
+]

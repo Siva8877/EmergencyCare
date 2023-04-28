@@ -9,6 +9,9 @@ import { CountryService } from './demo/service/country.service';
 import { CustomerService } from './demo/service/customer.service';
 import { MasterService } from './demo/service/master.service';
 import { HospitalService } from './demo/service/hospital.service';
+import { UserService } from './demo/service/user.service';
+import { DataStorageService } from './demo/service/data.storage.service';
+
 import { PatientService } from './demo/service/patient.service';
 
 import { EventService } from './demo/service/event.service';
@@ -27,7 +30,7 @@ import { PhotoService } from './demo/service/photo.service';
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
         CountryService, CustomerService, EventService, IconService, NodeService,
-        PhotoService, ProductService,MasterService,HospitalService,PatientService
+        PhotoService, ProductService, MasterService, HospitalService, PatientService, UserService, DataStorageService
     ],
     bootstrap: [AppComponent]
 })

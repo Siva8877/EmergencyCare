@@ -12,10 +12,18 @@ export class HospitalService {
             .then(res => res);
     }
 
-    getHospitalsV1() {
+    getHospitalsV1(hospitalId: any) {
         return this.http.get<any>('assets/demo/data/hospitalsv1.json')
             .toPromise()
-            .then(res => res);
+            .then(res => {
+                if (res && Array.isArray(res) && hospitalId) {
+                    return res.filter(obj => {
+                        return obj.hospitalId !== hospitalId
+                    });
+                } else {
+                    return res;
+                }
+            });
     }
 
 
@@ -31,16 +39,34 @@ export class HospitalService {
             .then(res => res);
     }
 
-    getBloodRequestList() {
+    getBloodRequestList(hospitalId: any) {
         return this.http.get<any>('assets/demo/data/bloodRequestData.json')
             .toPromise()
-            .then(res => res);
+            .then(res => {
+                if (res && Array.isArray(res) && hospitalId) {
+                    return res.filter(obj => {
+                        return obj.requestedByHosId === hospitalId ||
+                            obj.requestedToHosId === hospitalId
+                    });
+                } else {
+                    return res;
+                }
+            });
     }
 
-    getOrganRequestList() {
+    getOrganRequestList(hospitalId: any) {
         return this.http.get<any>('assets/demo/data/organRequestData.json')
             .toPromise()
-            .then(res => res);
+            .then(res => {
+                if (res && Array.isArray(res) && hospitalId) {
+                    return res.filter(obj => {
+                        return obj.requestedByHosId === hospitalId ||
+                            obj.requestedToHosId === hospitalId
+                    });
+                } else {
+                    return res;
+                }
+            });
     }
     
 }

@@ -5,7 +5,7 @@ import { Message, MessageService } from 'primeng/api';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { Table } from 'primeng/table';
 import { DropdownModule } from 'primeng/dropdown';
-
+import { Router } from '@angular/router';
 @Component({
     templateUrl: './organ.availability.component.html',
     providers: [MessageService]
@@ -28,13 +28,26 @@ export class OrganAvailabilityComponent implements OnInit, OnDestroy {
     liverSizeRange: number[] = [1, 20];
     liverWeightRange: number[] = [500, 2500];
     heartWeightRange: number[] = [200, 400];
+    hospitalId = '';
     @ViewChild('filter') filter!: ElementRef;
-    constructor(private hospitalService: HospitalService, public layoutService: LayoutService,private service: MessageService) {
+    constructor(private hospitalService: HospitalService, public layoutService: LayoutService, private service: MessageService, private router: Router) {
         this.organList = [
             { name: 'All', code: 'ALL' },
             { name: 'Liver', code: 'Liver' },
             { name: 'Heart', code: 'Heart' }
         ];
+
+        if (localStorage.getItem('userId') && localStorage.getItem('role') === 'admin' && localStorage.getItem('hospitalId')) {
+            this.hospitalId = localStorage.getItem('hospitalId') || '';
+        } else if (localStorage.getItem('userId') && localStorage.getItem('role') === 'superadmin') {
+            this.hospitalId = '';
+        } else {
+            localStorage.setItem('userId', '');
+            localStorage.setItem('password', '');
+            localStorage.setItem('role', '');
+            localStorage.setItem('name', '');
+            this.router.navigate(['/login']);
+        }
 
     }
 

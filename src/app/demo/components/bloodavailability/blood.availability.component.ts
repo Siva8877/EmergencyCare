@@ -4,7 +4,7 @@ import { BloodAvailability,Hospital } from 'src/app/demo/api/hospital';
 import { Message, MessageService } from 'primeng/api';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { Table } from 'primeng/table';
-
+import { Router } from '@angular/router';
 @Component({
     templateUrl: './blood.availability.component.html',
     providers: [MessageService]
@@ -27,9 +27,21 @@ export class BloodAvailabilityComponent implements OnInit, OnDestroy {
     heartBeatValue: number[] = [30, 150];
     respRateValue: number[] = [5, 30];
     oxygenRateValue: number[] = [50, 150];
+    hospitalId = '';
     @ViewChild('filter') filter!: ElementRef;
-    constructor(private hospitalService: HospitalService,public layoutService: LayoutService,private service: MessageService) {
-    
+    constructor(private hospitalService: HospitalService, public layoutService: LayoutService,
+        private service: MessageService, private router: Router) {
+        if (localStorage.getItem('userId') && localStorage.getItem('role') === 'admin' && localStorage.getItem('hospitalId')) {
+            this.hospitalId = localStorage.getItem('hospitalId') || '';
+        } else if (localStorage.getItem('userId') && localStorage.getItem('role') === 'superadmin') {
+            this.hospitalId = '';
+        } else {
+            localStorage.setItem('userId', '');
+            localStorage.setItem('password', '');
+            localStorage.setItem('role', '');
+            localStorage.setItem('name', '');
+            this.router.navigate(['/login']);
+        }
     }
 
     ngOnInit() {
