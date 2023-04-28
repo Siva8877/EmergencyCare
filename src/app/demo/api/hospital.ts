@@ -22,6 +22,7 @@ export interface BloodAvailability {
 export interface OrganAvailability {
     itemId: number;
     hospitalName? : string;
+    hospitalId? : string;
     bloodGroup: string;
     donorAge: number;
     liverSize : number;

@@ -1,20 +1,27 @@
 import { Component, OnInit, OnDestroy ,ViewChild, ElementRef} from '@angular/core';
 import { HospitalService } from 'src/app/demo/service/hospital.service';
 import { BloodAvailability,Hospital,OrganAvailability } from 'src/app/demo/api/hospital';
-
+import { Message, MessageService } from 'primeng/api';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { Table } from 'primeng/table';
 import { DropdownModule } from 'primeng/dropdown';
 
 @Component({
     templateUrl: './organ.availability.component.html',
+    providers: [MessageService]
 })
 export class OrganAvailabilityComponent implements OnInit, OnDestroy {
 
     loading: boolean = true;
+    showOrganRequestDialog: boolean = false;
+    
     organList: any[] = [];
     selectedOrgan = 'ALL';
-    hospitalDataList: Hospital[] = [];
+    selectedHospitalName = '';
+    
+    hospitalDataList: any[] = [];
+    filteredHospitalList: any[] = [];
+    selectedHospital  = '';
     organAvailabilityList: any[] = [];
     allOrganAvailabilityList: any[] = [];
     activityValues: number[] = [0, 100];
@@ -22,7 +29,7 @@ export class OrganAvailabilityComponent implements OnInit, OnDestroy {
     liverWeightRange: number[] = [500, 2500];
     heartWeightRange: number[] = [200, 400];
     @ViewChild('filter') filter!: ElementRef;
-    constructor(private hospitalService: HospitalService, public layoutService: LayoutService) {
+    constructor(private hospitalService: HospitalService, public layoutService: LayoutService,private service: MessageService) {
         this.organList = [
             { name: 'All', code: 'ALL' },
             { name: 'Liver', code: 'Liver' },
@@ -42,8 +49,9 @@ export class OrganAvailabilityComponent implements OnInit, OnDestroy {
                 this.hospitalDataList.forEach(hospitalData => {
                     if (hospitalData.facilities && hospitalData.facilities.organAvailability && Array.isArray(hospitalData.facilities.organAvailability)
                         && hospitalData.facilities.organAvailability.length) {
-                        const hospitalMapData = hospitalData.facilities.organAvailability.map(organData => {
+                        const hospitalMapData = hospitalData.facilities.organAvailability.map((organData: any) => {
                             organData['hospitalName'] = hospitalData.name;
+                            organData['hospitalId'] = hospitalData.hospitalId;
                             return organData
                         })
                         if (hospitalMapData) {
@@ -84,5 +92,18 @@ export class OrganAvailabilityComponent implements OnInit, OnDestroy {
         }
 
     }
-   
+
+    onRequestClick(donorAvailability : any){
+        this.selectedHospital  = '';
+        this.showOrganRequestDialog = true;
+        this.selectedHospitalName = donorAvailability.hospitalName;
+        this.filteredHospitalList =  this.hospitalDataList.filter((hosObj) => {
+            return hosObj.hospitalId !== donorAvailability.hospitalId;
+        });
+    }
+
+    onSendRequestClick(){
+        this.showOrganRequestDialog = false;
+        this.service.add({ key: 'tst', severity: 'success', summary: 'Success Message', detail: 'Successfully Requested for Organ.' });
+    }
 }

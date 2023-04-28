@@ -1,0 +1,83 @@
+    <div class="grid"><div class="col-12">
+ 
+		<div class="card">
+			<h5>Organ Request List</h5>
+			<p-table #dt1 [value]="organRequestData" dataKey="requestId" [rows]="10" [loading]="loading" [rowHover]="true" styleClass="p-datatable-gridlines" [paginator]="true" [globalFilterFields]="['requestedByHosName','requestedToHosName']" responsiveLayout="scroll">
+				<ng-template pTemplate="caption">
+					<div class="flex justify-content-between flex-column sm:flex-row">
+						<button pButton label="Clear" class="p-button-outlined mb-2" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+						<span class="p-input-icon-left mb-2">
+							<i class="pi pi-search"></i>
+							<input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)" placeholder="Search Keyword" class="w-full"/>
+						</span>
+					</div>
+				</ng-template>
+				<ng-template pTemplate="header">
+					<tr>
+						<th style="min-width: 12rem" pSortableColumn="requestedByHosName">
+							<div class="flex justify-content-between align-items-center">
+								Requested By Hospital Name
+                                <p-sortIcon field="requestedByHosName"></p-sortIcon>
+								<p-columnFilter type="text" field="requestedByHosName" display="menu" placeholder="Search by Hospital name"></p-columnFilter>
+							</div>
+						</th>
+						<th style="min-width: 12rem" pSortableColumn="requestedToHosName">
+							<div class="flex justify-content-between align-items-center">
+								Requested To Hospital Name
+                                <p-sortIcon field="requestedToHosName"></p-sortIcon>
+								<p-columnFilter type="text" field="requestedToHosName" display="menu" placeholder="Search by Hospital name"></p-columnFilter>
+							</div>
+						</th>
+                        <th style="min-width: 12rem" pSortableColumn="organName">
+							<div class="flex justify-content-between align-items-center">
+								Organ Name
+								<p-sortIcon field="organName"></p-sortIcon>
+							</div>
+						</th>
+						<th style="min-width: 12rem" pSortableColumn="requestState">
+							<div class="flex justify-content-between align-items-center">
+								Requested State
+								<p-sortIcon field="requestState"></p-sortIcon>
+							</div>
+						</th>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="body" let-organRequestObj>
+					<tr>
+						<td>
+							{{organRequestObj.requestedByHosName}}
+						</td>
+                        <td>
+							{{organRequestObj.requestedToHosName}}
+						</td>
+                        <td>
+							{{organRequestObj.organName}}
+						</td>
+						<td>
+							{{organRequestObj.requestState}}
+						</td>
+					</tr>
+                    
+				</ng-template>
+
+                
+
+               
+				<ng-template pTemplate="emptymessage">
+					<tr>
+						<td colspan="8">No Blood Request found.</td>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="loadingbody">
+					<tr>
+						<td colspan="8">Loading Blood Request data. Please wait.</td>
+					</tr>
+				</ng-template>
+    		</p-table>
+		</div>
+
+	</div>
+
+</div>
+
+

@@ -27,6 +27,12 @@ export class AppMenuComponent implements OnInit {
                 items: [
                     { label: 'PatientList', icon: 'pi pi-fw pi-users', routerLink: ['/patient'] }
                 ]
+            }, {
+                label: 'Request',
+                items: [
+                    { label: 'Blood Request', icon: 'pi pi-fw pi-users', routerLink: ['/bloodrequest'] },
+                    { label: 'Organ Request', icon: 'pi pi-fw pi-users', routerLink: ['/organrequest'] }
+                ]
             }
             /* ,
             {

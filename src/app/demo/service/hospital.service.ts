@@ -30,5 +30,17 @@ export class HospitalService {
             .toPromise()
             .then(res => res);
     }
+
+    getBloodRequestList() {
+        return this.http.get<any>('assets/demo/data/bloodRequestData.json')
+            .toPromise()
+            .then(res => res);
+    }
+
+    getOrganRequestList() {
+        return this.http.get<any>('assets/demo/data/organRequestData.json')
+            .toPromise()
+            .then(res => res);
+    }
     
 }

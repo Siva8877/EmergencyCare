@@ -1,18 +1,24 @@
-    <div class="grid"><div class="col-12">
- 
+<div class="grid">
+	<p-toast key="tst"></p-toast>
+	<div class="col-12">
+
 		<div class="card">
 			<h5>Organ Availability List</h5>
-			<p-table #dt1 [value]="organAvailabilityList" dataKey="itemId" [rows]="10" [loading]="loading" [rowHover]="true" styleClass="p-datatable-gridlines" [paginator]="true" [globalFilterFields]="['hospitalName','bloodGroup']" responsiveLayout="scroll">
+			<p-table #dt1 [value]="organAvailabilityList" dataKey="itemId" [rows]="10" [loading]="loading"
+				[rowHover]="true" styleClass="p-datatable-gridlines" [paginator]="true"
+				[globalFilterFields]="['hospitalName','bloodGroup']" responsiveLayout="scroll">
 				<ng-template pTemplate="caption">
 					<div class="flex justify-content-between flex-column sm:flex-row">
-						<button pButton label="Clear" class="p-button-outlined mb-2" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+						<button pButton label="Clear" class="p-button-outlined mb-2" icon="pi pi-filter-slash"
+							(click)="clear(dt1)"></button>
 						<span class="p-input-icon-left mb-2">
 							Filter By Organ
-							<p-dropdown [options]="organList" [(ngModel)]="selectedOrgan" optionLabel="name" optionValue="code"
-								(onChange)="onOrganChange($event)"></p-dropdown>
+							<p-dropdown [options]="organList" [(ngModel)]="selectedOrgan" optionLabel="name"
+								optionValue="code" (onChange)="onOrganChange($event)"></p-dropdown>
 						</span>
 						<span class="p-input-icon-left mb-2"><i class="pi pi-search"></i>
-							<input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)" placeholder="Search Keyword" class="w-full"/>
+							<input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)"
+								placeholder="Search Keyword" class="w-full" />
 						</span>
 					</div>
 				</ng-template>
@@ -21,24 +27,29 @@
 						<th style="min-width: 12rem" pSortableColumn="hospitalName">
 							<div class="flex justify-content-between align-items-center">
 								Hospital Name
-                                <p-sortIcon field="hospitalName"></p-sortIcon>
-								<p-columnFilter type="text" field="hospitalName" display="menu" placeholder="Search by Hospital name"></p-columnFilter>
+								<p-sortIcon field="hospitalName"></p-sortIcon>
+								<p-columnFilter type="text" field="hospitalName" display="menu"
+									placeholder="Search by Hospital name"></p-columnFilter>
 							</div>
 						</th>
 						<th style="min-width: 12rem" pSortableColumn="bloodGroup">
 							<div class="flex justify-content-between align-items-center">
 								Blood Group
-                                <p-sortIcon field="bloodGroup"></p-sortIcon>
-								<p-columnFilter type="text" field="bloodGroup" display="menu" placeholder="Search by BloodGroup"></p-columnFilter>
+								<p-sortIcon field="bloodGroup"></p-sortIcon>
+								<p-columnFilter type="text" field="bloodGroup" display="menu"
+									placeholder="Search by BloodGroup"></p-columnFilter>
 							</div>
 						</th>
-                        <th style="min-width: 12rem" pSortableColumn="donorAge">
+						<th style="min-width: 12rem" pSortableColumn="donorAge">
 							<div class="flex justify-content-between align-items-center">
 								Donor Age
 								<p-sortIcon field="donorAge"></p-sortIcon>
-								<p-columnFilter field="donorAge" matchMode="between" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+								<p-columnFilter field="donorAge" matchMode="between" display="menu"
+									[showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
 									<ng-template pTemplate="filter" let-filter="filterCallback">
-										<p-slider [ngModel]="activityValues" [range]="true" (onSlideEnd)="filter($event.values)" styleClass="m-3" [style]="{'min-width': '12rem'}" ></p-slider>
+										<p-slider [ngModel]="activityValues" [range]="true"
+											(onSlideEnd)="filter($event.values)" styleClass="m-3"
+											[style]="{'min-width': '12rem'}"></p-slider>
 										<div class="flex align-items-center justify-content-between px-2">
 											<span>{{activityValues[0]}}</span>
 											<span>{{activityValues[1]}}</span>
@@ -47,13 +58,17 @@
 								</p-columnFilter>
 							</div>
 						</th>
-						<th style="min-width: 12rem" pSortableColumn="liverSize" *ngIf="selectedOrgan === 'ALL' || selectedOrgan === 'Liver'">
+						<th style="min-width: 12rem" pSortableColumn="liverSize"
+							*ngIf="selectedOrgan === 'ALL' || selectedOrgan === 'Liver'">
 							<div class="flex justify-content-between align-items-center">
 								Liver Size (in CM)
 								<p-sortIcon field="liverSize"></p-sortIcon>
-								<p-columnFilter field="liverSize" matchMode="between" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+								<p-columnFilter field="liverSize" matchMode="between" display="menu"
+									[showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
 									<ng-template pTemplate="filter" let-filter="filterCallback">
-										<p-slider [ngModel]="liverSizeRange" [range]="true" [min]="1" [max]="20" (onSlideEnd)="filter($event.values)" styleClass="m-3" [style]="{'min-width': '12rem'}" ></p-slider>
+										<p-slider [ngModel]="liverSizeRange" [range]="true" [min]="1" [max]="20"
+											(onSlideEnd)="filter($event.values)" styleClass="m-3"
+											[style]="{'min-width': '12rem'}"></p-slider>
 										<div class="flex align-items-center justify-content-between px-2">
 											<span>{{liverSizeRange[0]}}</span>
 											<span>{{liverSizeRange[1]}}</span>
@@ -62,13 +77,17 @@
 								</p-columnFilter>
 							</div>
 						</th>
-						<th style="min-width: 12rem" pSortableColumn="liverWeight" *ngIf="selectedOrgan === 'ALL' || selectedOrgan === 'Liver'">
+						<th style="min-width: 12rem" pSortableColumn="liverWeight"
+							*ngIf="selectedOrgan === 'ALL' || selectedOrgan === 'Liver'">
 							<div class="flex justify-content-between align-items-center">
 								Liver Weight
 								<p-sortIcon field="liverWeight"></p-sortIcon>
-								<p-columnFilter field="liverWeight" matchMode="between" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+								<p-columnFilter field="liverWeight" matchMode="between" display="menu"
+									[showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
 									<ng-template pTemplate="filter" let-filter="filterCallback">
-										<p-slider [ngModel]="liverWeightRange" [range]="true" [min]="500" [max]="2500" (onSlideEnd)="filter($event.values)" styleClass="m-3" [style]="{'min-width': '12rem'}" ></p-slider>
+										<p-slider [ngModel]="liverWeightRange" [range]="true" [min]="500" [max]="2500"
+											(onSlideEnd)="filter($event.values)" styleClass="m-3"
+											[style]="{'min-width': '12rem'}"></p-slider>
 										<div class="flex align-items-center justify-content-between px-2">
 											<span>{{liverWeightRange[0]}}</span>
 											<span>{{liverWeightRange[1]}}</span>
@@ -77,13 +96,17 @@
 								</p-columnFilter>
 							</div>
 						</th>
-						<th style="min-width: 12rem" pSortableColumn="heartWeight" *ngIf="selectedOrgan === 'ALL' || selectedOrgan === 'Heart'">
+						<th style="min-width: 12rem" pSortableColumn="heartWeight"
+							*ngIf="selectedOrgan === 'ALL' || selectedOrgan === 'Heart'">
 							<div class="flex justify-content-between align-items-center">
 								Heart Weight
 								<p-sortIcon field="heartWeight"></p-sortIcon>
-								<p-columnFilter field="heartWeight" matchMode="between" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+								<p-columnFilter field="heartWeight" matchMode="between" display="menu"
+									[showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
 									<ng-template pTemplate="filter" let-filter="filterCallback">
-										<p-slider [ngModel]="heartWeightRange" [range]="true" [min]="200" [max]="400" (onSlideEnd)="filter($event.values)" styleClass="m-3" [style]="{'min-width': '12rem'}" ></p-slider>
+										<p-slider [ngModel]="heartWeightRange" [range]="true" [min]="200" [max]="400"
+											(onSlideEnd)="filter($event.values)" styleClass="m-3"
+											[style]="{'min-width': '12rem'}"></p-slider>
 										<div class="flex align-items-center justify-content-between px-2">
 											<span>{{heartWeightRange[0]}}</span>
 											<span>{{heartWeightRange[1]}}</span>
@@ -100,29 +123,29 @@
 						<td>
 							{{donorAvailability.hospitalName}}
 						</td>
-                        <td>
+						<td>
 							{{donorAvailability.bloodGroup}}
 						</td>
-                        <td>
+						<td>
 							{{donorAvailability.donorAge}}
 						</td>
 						<td *ngIf="selectedOrgan === 'ALL' || selectedOrgan === 'Liver'">
-							{{donorAvailability.liverSize || 'NA'}} 
+							{{donorAvailability.liverSize || 'NA'}}
 						</td>
-                        <td *ngIf="selectedOrgan === 'ALL' || selectedOrgan === 'Liver'">
+						<td *ngIf="selectedOrgan === 'ALL' || selectedOrgan === 'Liver'">
 							{{donorAvailability.liverWeight || 'NA'}}
 						</td>
-                        <td *ngIf="selectedOrgan === 'ALL' || selectedOrgan === 'Heart'">
+						<td *ngIf="selectedOrgan === 'ALL' || selectedOrgan === 'Heart'">
 							{{donorAvailability.heartWeight || 'NA'}}
 						</td>
-						<td><p-button type="button">Send Request</p-button></td>
+						<td><p-button type="button" (onClick) = "onRequestClick(donorAvailability)">Send Request</p-button></td>
 					</tr>
-                    
+
 				</ng-template>
 
-                
 
-               
+
+
 				<ng-template pTemplate="emptymessage">
 					<tr>
 						<td colspan="8">No Organ found.</td>
@@ -133,10 +156,23 @@
 						<td colspan="8">Loading Organ Availability data. Please wait.</td>
 					</tr>
 				</ng-template>
-    		</p-table>
+			</p-table>
 		</div>
 
 	</div>
+
+
+	<p-dialog header="Send organ request" [(visible)]="showOrganRequestDialog" [modal]="true" showEffect="fade" [style]="{width: '30vw'}" [breakpoints]="{'960px': '75vw'}">
+		<p class="line-height-3 m-0">
+			Request Organ From : {{selectedHospitalName}}
+		</p>
+		<h5>Requested By</h5>
+		<p-dropdown [options]="filteredHospitalList" [(ngModel)]="selectedHospital" 
+		optionLabel="name" optionValue="name" placeholder="Select hospital" [showClear]="true"></p-dropdown>
+
+		<ng-template pTemplate="footer">
+			<button pButton icon="pi pi-check" [disabled]="!selectedHospital" (click)="onSendRequestClick()" label="Send Request" class="p-button-outlined"></button>
+			<button pButton icon="pi pi-close" (click)="showOrganRequestDialog=false" label="Close" class="p-button-secondary"></button>
+		</ng-template>
+	</p-dialog>
 </div>
-
-

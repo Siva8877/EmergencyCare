@@ -1,5 +1,5 @@
     <div class="grid"><div class="col-12">
- 
+		<p-toast key="tst"></p-toast>
 		<div class="card">
 			<h5>Blood Availability List</h5>
 			<p-table #dt1 [value]="bloodAvailabilityList" dataKey="itemId" [rows]="10" [loading]="loading" [rowHover]="true" styleClass="p-datatable-gridlines" [paginator]="true" [globalFilterFields]="['hospitalName','bloodGroup']" responsiveLayout="scroll">
@@ -48,7 +48,7 @@
                         <td>
 							{{bloodAvailability.AvailableUnit}}
 						</td>
-						<td><p-button type="button">Send Request</p-button></td>
+						<td><p-button type="button" (onClick) = "onRequestClick(bloodAvailability)">Send Request</p-button></td>
 					</tr>
                     
 				</ng-template>
@@ -70,6 +70,28 @@
 		</div>
 
 	</div>
+
+
+	<p-dialog header="Send Blood request" [(visible)]="showBloodRequestDialog" [modal]="true" showEffect="fade" [style]="{width: '30vw'}" [breakpoints]="{'960px': '75vw'}">
+		<p class="line-height-3 m-0">
+			Request Blood From : {{selectedHospitalName}}
+		</p>
+		<p class="line-height-3 m-0">
+			Requesting Blood group : {{selectedBloodGroup}}
+		</p>
+		<p class="line-height-3 m-0">
+			Available Units : {{selectedBloodAvailability}}
+		</p>
+		<h5>Requested By</h5>
+		<p-dropdown [options]="filteredHospitalList" [(ngModel)]="selectedHospital" 
+		optionLabel="name" optionValue="name" placeholder="Select hospital" [showClear]="true"></p-dropdown>
+		<p-inputNumber mode="decimal" [(ngModel)]="enteredUnits" [showButtons]="true" inputId="withoutgrouping" [min]="0" [max]="selectedBloodAvailability">
+		</p-inputNumber>
+		<ng-template pTemplate="footer">
+			<button pButton icon="pi pi-check" [disabled]="!selectedHospital || !enteredUnits" (click)="onSendRequestClick()" label="Send Request" class="p-button-outlined"></button>
+			<button pButton icon="pi pi-close" (click)="showBloodRequestDialog=false" label="Close" class="p-button-secondary"></button>
+		</ng-template>
+	</p-dialog>
 </div>
 
 

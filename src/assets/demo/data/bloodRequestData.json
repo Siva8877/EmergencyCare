@@ -1,0 +1,62 @@
+[
+	{
+		"requestedByHosId": "1001",
+		"requestedByHosName": "HospitalA",
+		"requestedToHosId": "1002",
+		"requestedToHosName": "HospitalB",
+		"bloodGroupName": "A+",
+		"requestedUnit": 5,
+		"requestState": "Pending",
+		"requestId": "1001"
+	},
+	{
+		"requestedByHosId": "1001",
+		"requestedByHosName": "HospitalA",
+		"requestedToHosId": "1002",
+		"requestedToHosName": "HospitalB",
+		"bloodGroupName": "B+",
+		"requestedUnit": 2,
+		"requestState": "Approved",
+		"requestId": "1002"
+	},
+	{
+		"requestedByHosId": "1001",
+		"requestedByHosName": "HospitalA",
+		"requestedToHosId": "1002",
+		"requestedToHosName": "HospitalB",
+		"bloodGroupName": "AB+",
+		"requestedUnit": 3,
+		"requestState": "Declined",
+		"requestId": "1003"
+	},
+	{
+		"requestedByHosId": "1002",
+		"requestedByHosName": "HospitalB",
+		"requestedToHosId": "1001",
+		"requestedToHosName": "HospitalA",
+		"bloodGroupName": "AB-",
+		"requestedUnit": 4,
+		"requestState": "Approved",
+		"requestId": "1004"
+	},
+	{
+		"requestedByHosId": "1002",
+		"requestedByHosName": "HospitalB",
+		"requestedToHosId": "1001",
+		"requestedToHosName": "HospitalA",
+		"bloodGroupName": "B-",
+		"requestedUnit": 5,
+		"requestState": "Pending",
+		"requestId": "1005"
+	},
+	{
+		"requestedByHosId": "1002",
+		"requestedByHosName": "HospitalB",
+		"requestedToHosId": "1001",
+		"requestedToHosName": "HospitalA",
+		"bloodGroupName": "A-",
+		"requestedUnit": 6,
+		"requestState": "Declined",
+		"requestId": "1006"
+	}
+]

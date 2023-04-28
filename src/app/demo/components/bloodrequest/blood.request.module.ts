@@ -1,5 +1,5 @@
 
-import { OrganAvailabilityComponent } from './organ.availability.component';
+import { BloodRequestComponent } from './blood.request.component';
 import { ChartModule } from 'primeng/chart';
 import { MenuModule } from 'primeng/menu';
 import { StyleClassModule } from 'primeng/styleclass';
@@ -14,8 +14,6 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
 import { RippleModule } from 'primeng/ripple';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { DropdownModule } from 'primeng/dropdown';
-import { MessagesModule } from 'primeng/messages';
-import { MessageModule } from 'primeng/message';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { ToastModule } from 'primeng/toast';
 import { SliderModule } from 'primeng/slider';
@@ -23,7 +21,7 @@ import { RatingModule } from 'primeng/rating';
 import { ToolbarModule } from 'primeng/toolbar';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextareaModule } from 'primeng/inputtextarea';
-import { OrganAvailabilityRoutingModule } from './organ.availability-routing.module';
+import { BloodRequestRoutingModule } from './blood.request-routing.module';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { TabMenuModule } from 'primeng/tabmenu';
 @NgModule({
@@ -36,7 +34,7 @@ import { TabMenuModule } from 'primeng/tabmenu';
         StyleClassModule,
         PanelMenuModule,
         ButtonModule,
-        OrganAvailabilityRoutingModule,
+        BloodRequestRoutingModule,
         InputTextModule,
 		ToggleButtonModule,
 		RippleModule,
@@ -50,10 +48,8 @@ import { TabMenuModule } from 'primeng/tabmenu';
         DialogModule,
         InputTextareaModule,
         InputNumberModule,
-        TabMenuModule,
-        MessagesModule,
-		MessageModule
+        TabMenuModule
     ],
-    declarations: [OrganAvailabilityComponent]
+    declarations: [BloodRequestComponent]
 })
-export class OrganAvailabilityModule { }
+export class BloodRequestModule { }

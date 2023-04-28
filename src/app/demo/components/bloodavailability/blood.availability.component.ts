@@ -1,17 +1,26 @@
 import { Component, OnInit, OnDestroy ,ViewChild, ElementRef} from '@angular/core';
 import { HospitalService } from 'src/app/demo/service/hospital.service';
 import { BloodAvailability,Hospital } from 'src/app/demo/api/hospital';
-
+import { Message, MessageService } from 'primeng/api';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { Table } from 'primeng/table';
 
 @Component({
     templateUrl: './blood.availability.component.html',
+    providers: [MessageService]
 })
 export class BloodAvailabilityComponent implements OnInit, OnDestroy {
 
     loading: boolean = true;
-    hospitalBloodDataList: Hospital[] = [];
+    showBloodRequestDialog: boolean = false;
+    selectedHospitalName = '';
+    enteredUnits = 0;
+    
+    filteredHospitalList: any[] = [];
+    selectedHospital  = '';
+    selectedBloodGroup = '';
+    selectedBloodAvailability = 0;
+    hospitalBloodDataList: any[] = [];
     bloodAvailabilityList : any[] = [];
     activityValues: number[] = [0, 100];
     tempratureValue: number[] = [90, 110];
@@ -19,7 +28,7 @@ export class BloodAvailabilityComponent implements OnInit, OnDestroy {
     respRateValue: number[] = [5, 30];
     oxygenRateValue: number[] = [50, 150];
     @ViewChild('filter') filter!: ElementRef;
-    constructor(private hospitalService: HospitalService,public layoutService: LayoutService) {
+    constructor(private hospitalService: HospitalService,public layoutService: LayoutService,private service: MessageService) {
     
     }
 
@@ -33,8 +42,9 @@ export class BloodAvailabilityComponent implements OnInit, OnDestroy {
                 this.hospitalBloodDataList.forEach(hospitalData => {
                     if (hospitalData.facilities && hospitalData.facilities.bloodAvailability && Array.isArray(hospitalData.facilities.bloodAvailability)
                         && hospitalData.facilities.bloodAvailability.length) {
-                        const hospitalMapData = hospitalData.facilities.bloodAvailability.map(bloodData => {
+                        const hospitalMapData = hospitalData.facilities.bloodAvailability.map((bloodData : any) => {
                             bloodData['hospitalName'] = hospitalData.name;
+                            bloodData['hospitalId'] = hospitalData.hospitalId;
                             return bloodData
                         })
                         if (hospitalMapData) {
@@ -57,6 +67,26 @@ export class BloodAvailabilityComponent implements OnInit, OnDestroy {
     clear(table: Table) {
         table.clear();
         this.filter.nativeElement.value = '';
+    }
+    onRequestClick(selectedBlood : any){
+        this.showBloodRequestDialog = true;
+        this.selectedHospital  = '';
+        
+        this.enteredUnits = 0;
+        this.selectedBloodGroup = selectedBlood.bloodGroup;
+    this.selectedBloodAvailability = selectedBlood.AvailableUnit;
+
+        this.selectedHospitalName = selectedBlood.hospitalName;
+        this.filteredHospitalList =  this.hospitalBloodDataList.filter((hosObj : any) => {
+            return hosObj.hospitalId !== selectedBlood.hospitalId;
+        });
+
+    }
+
+    onSendRequestClick(){
+        this.showBloodRequestDialog = false;
+        this.service.add({ key: 'tst', severity: 'success', summary: 'Success Message', detail: 'Successfully Requested for Blood.' });
+        //this.service.add({ key: 'tst', severity: 'success', summary: 'Success Message', detail: 'Successfully Requested for Organ.' });
     }
    
 }

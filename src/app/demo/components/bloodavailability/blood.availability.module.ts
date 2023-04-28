@@ -24,6 +24,8 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { BloodAvailabilityRoutingModule } from './blood.availability-routing.module';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { TabMenuModule } from 'primeng/tabmenu';
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
 @NgModule({
     imports: [
         CommonModule,
@@ -48,7 +50,9 @@ import { TabMenuModule } from 'primeng/tabmenu';
         DialogModule,
         InputTextareaModule,
         InputNumberModule,
-        TabMenuModule
+        TabMenuModule,
+        MessagesModule,
+        MessageModule
     ],
     declarations: [BloodAvailabilityComponent]
 })

@@ -11,7 +11,9 @@ import { AppLayoutComponent } from "./layout/app.layout.component";
                 children: [
                     { path: 'hospital', loadChildren: () => import('./demo/components/hospital/hospital.module').then(m => m.HospitalModule) },
                     { path: 'bloodlist', loadChildren: () => import('./demo/components/bloodavailability/blood.availability.module').then(m => m.BloodAvailabilityModule) },
+                    { path: 'bloodrequest', loadChildren: () => import('./demo/components/bloodrequest/blood.request.module').then(m => m.BloodRequestModule) },
                     { path: 'organlist', loadChildren: () => import('./demo/components/organavailability/organ.availability.module').then(m => m.OrganAvailabilityModule) },
+                    { path: 'organrequest', loadChildren: () => import('./demo/components/organrequest/organ.request.module').then(m => m.OrganRequestModule) },
 
                     { path: 'patient', loadChildren: () => import('./demo/components/patient/patient.module').then(m => m.PatientModule) },
                     { path: 'uikit', loadChildren: () => import('./demo/components/uikit/uikit.module').then(m => m.UIkitModule) },
