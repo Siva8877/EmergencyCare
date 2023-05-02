@@ -15,11 +15,15 @@ export class BloodAvailabilityComponent implements OnInit, OnDestroy {
     loading: boolean = true;
     showBloodRequestDialog: boolean = false;
     selectedHospitalName = '';
+    selectedHospitalID = '';
     enteredUnits = 0;
     
     filteredHospitalList: any[] = [];
     selectedHospital  = '';
+    requestedByHospitalName  = '';
     selectedBloodGroup = '';
+    selectedBloodId = '';
+    
     selectedBloodAvailability = 0;
     hospitalBloodDataList: any[] = [];
     bloodAvailabilityList : any[] = [];
@@ -98,25 +102,49 @@ export class BloodAvailabilityComponent implements OnInit, OnDestroy {
         table.clear();
         this.filter.nativeElement.value = '';
     }
-    onRequestClick(selectedBlood : any){
+    onRequestClick(selectedBlood: any) {
         this.showBloodRequestDialog = true;
-        this.selectedHospital  = '';
-        
+        this.selectedHospital = '';
+
         this.enteredUnits = 0;
         this.selectedBloodGroup = selectedBlood.bloodGroup;
-    this.selectedBloodAvailability = selectedBlood.AvailableUnit;
-
+        this.selectedBloodId = selectedBlood.bloodGroupID;
+        this.selectedBloodAvailability = selectedBlood.AvailableUnit;
+        this.selectedHospitalID = selectedBlood.hospitalId;
         this.selectedHospitalName = selectedBlood.hospitalName;
-        this.filteredHospitalList =  this.hospitalBloodDataList.filter((hosObj : any) => {
+        this.filteredHospitalList = this.hospitalBloodDataList.filter((hosObj: any) => {
             return hosObj.hospitalId !== selectedBlood.hospitalId;
         });
 
+        if (this.hospitalId) {
+            this.requestedByHospitalName = this.hospitalBloodDataList.find((hosObj: any) => {
+                return hosObj.hospitalId === this.hospitalId;
+            }).name;
+        }
+
     }
 
-    onSendRequestClick(){
-        this.showBloodRequestDialog = false;
-        this.service.add({ key: 'tst', severity: 'success', summary: 'Success Message', detail: 'Successfully Requested for Blood.' });
-        //this.service.add({ key: 'tst', severity: 'success', summary: 'Success Message', detail: 'Successfully Requested for Organ.' });
+    onSendRequestClick() {
+        let bloodRequest: any = {};
+        if (this.selectedBloodId && this.enteredUnits && this.selectedHospitalID && (this.hospitalId || this.selectedHospital)) {
+            bloodRequest.bloodGroupID = this.selectedBloodId;
+            bloodRequest.requestedByHosId = this.hospitalId || this.selectedHospital;
+            bloodRequest.requestedToHosId = this.selectedHospitalID;
+            bloodRequest.requestedUnit = this.enteredUnits;
+
+            this.hospitalService.sendBloodRequest(bloodRequest).then(bloodResponseData => {
+                if (bloodResponseData && bloodResponseData.status === 200) {
+                    this.showBloodRequestDialog = false;
+                    this.service.add({ key: 'tst', severity: 'success', summary: 'Success Message', detail: 'Successfully Requested for Blood.' });
+
+                } else {
+                    this.showBloodRequestDialog = false;
+                    this.service.add({ key: 'tst', severity: 'error', summary: 'Error Message', detail: 'Error while sending request for Blood.' });
+                }
+            });
+        } else {
+            this.service.add({ key: 'tst', severity: 'error', summary: 'Enter All Details', detail: 'Enter all details to sending request for Blood.' });
+        }
     }
 
     onActiveItemChange(event: any){

@@ -74,19 +74,23 @@
 		<p class="line-height-3 m-0">
 			Request Blood From : {{selectedHospitalName}}
 		</p>
+		<p class="line-height-3 m-0" *ngIf="hospitalId">
+			Request Blood By : {{requestedByHospitalName}}
+		</p>
 		<p class="line-height-3 m-0">
 			Requesting Blood group : {{selectedBloodGroup}}
 		</p>
 		<p class="line-height-3 m-0">
 			Available Units : {{selectedBloodAvailability}}
 		</p>
-		<h5>Requested By</h5>
-		<p-dropdown [options]="filteredHospitalList" [(ngModel)]="selectedHospital" 
-		optionLabel="name" optionValue="name" placeholder="Select hospital" [showClear]="true"></p-dropdown>
+		<h5 *ngIf="!hospitalId">Requested By</h5>
+		<p-dropdown [options]="filteredHospitalList" [(ngModel)]="selectedHospital"  *ngIf="!hospitalId"
+		optionLabel="name" optionValue="hospitalId" placeholder="Select hospital" [showClear]="true"></p-dropdown>
+
 		<p-inputNumber mode="decimal" [(ngModel)]="enteredUnits" [showButtons]="true" inputId="withoutgrouping" [min]="0" [max]="selectedBloodAvailability">
 		</p-inputNumber>
 		<ng-template pTemplate="footer">
-			<button pButton icon="pi pi-check" [disabled]="!selectedHospital || !enteredUnits" (click)="onSendRequestClick()" label="Send Request" class="p-button-outlined"></button>
+			<button pButton icon="pi pi-check" [disabled]="(!selectedHospital && !hospitalId) || !enteredUnits" (click)="onSendRequestClick()" label="Send Request" class="p-button-outlined"></button>
 			<button pButton icon="pi pi-close" (click)="showBloodRequestDialog=false" label="Close" class="p-button-secondary"></button>
 		</ng-template>
 	</p-dialog>

@@ -67,6 +67,16 @@ export class HospitalService {
             });
     }
 
+    sendBloodRequest(bloodRequestObj: any) {
+        return this.http.post<any>('http://localhost:8080/api/emr/request/blood',bloodRequestObj)
+            .toPromise()
+            .then(res => {
+                return res;
+            }).catch(err =>{
+                return err;
+            });
+    }
+
     getOrganRequestList(hospitalId: any) {
         return this.http.get<any>('assets/demo/data/organRequestData.json')
             .toPromise()

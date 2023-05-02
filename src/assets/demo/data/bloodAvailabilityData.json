@@ -4,12 +4,15 @@
 	"address": "HospitalA",
 	"facilities": {
 		"bloodAvailability": [{
+			"bloodGroupID": "1001",
 			"bloodGroup": "A+",
 			"AvailableUnit": 10
 		}, {
+			"bloodGroupID": "1002",
 			"bloodGroup": "B+",
 			"AvailableUnit": 12
 		}, {
+			"bloodGroupID": "1003",
 			"bloodGroup": "O+",
 			"AvailableUnit": 15
 		}]
@@ -21,12 +24,15 @@
 	"address": "HospitalB",
 	"facilities": {
 		"bloodAvailability": [{
+			"bloodGroupID": "1004",
 			"bloodGroup": "A-",
 			"AvailableUnit": 10
 		}, {
+			"bloodGroupID": "1005",
 			"bloodGroup": "B-",
 			"AvailableUnit": 4
 		}, {
+			"bloodGroupID": "1006",
 			"bloodGroup": "O-",
 			"AvailableUnit": 3
 		}]
