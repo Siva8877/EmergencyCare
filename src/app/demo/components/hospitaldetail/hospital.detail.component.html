@@ -1,0 +1,56 @@
+
+<div class="card">
+    <h5>Hospital Detail</h5>
+    <div class="field">
+        <label for="name">Name :  </label>
+        <input type="text" pInputText id="name" [(ngModel)]="hospitalData.name" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !hospitalData.name}"/>
+        <small class="ng-dirty ng-invalid" *ngIf="submitted && !hospitalData.name">Name is required.</small>
+    </div>
+    <div class="field">
+        <label for="name">Contact No : </label>
+        <input type="text" pInputText id="contactNo" [(ngModel)]="hospitalData.contactNo" required [ngClass]="{'ng-invalid ng-dirty' : submitted && !hospitalData.contactNo}"/>
+        <small class="ng-dirty ng-invalid" *ngIf="submitted && !hospitalData.contactNo">Contact No is required.</small>
+    </div>
+    <div class="field">
+        <label for="address">Address : </label>
+        <textarea id="address" pInputTextarea [(ngModel)]="hospitalData.address" required rows="3" cols="20" [ngClass]="{'ng-invalid ng-dirty' : submitted && !hospitalData.address}"></textarea>
+        <small class="ng-dirty ng-invalid" *ngIf="submitted && !hospitalData.address">Contact No is required.</small>
+    </div>
+
+    
+
+    <div class="field">
+        <label for="name">Emergency Bed : </label>
+        <p-inputNumber id="emergencyBed" [(ngModel)]="facilitiesDetails.emergencyBed"  [ngClass]="{'ng-invalid ng-dirty' : submitted && !facilitiesDetails.emergencyBed}"/>
+        <small class="ng-dirty ng-invalid" *ngIf="submitted && !facilitiesDetails.emergencyBed">EmergencyBed is required.</small>
+    </div>
+
+    <div class="field">
+        <label for="facilities">Select Facilities : </label>
+        <p-multiSelect [options]="facilityMaster" [(ngModel)]="facilitiesDetails.devicesAvailability" optionLabel="facilityName" placeholder="Select Facilities"  class="multiselect-custom" display="chip">
+            <ng-template let-facility pTemplate="body">
+                <div class="flex align-items-center">
+                    <span class="ml-2">{{facility.facilityName}}</span>
+                </div>
+            </ng-template>
+        </p-multiSelect>
+        <small class="ng-dirty ng-invalid" *ngIf="submitted && !facilitiesDetails.devicesAvailability">Facilities is required.</small>
+    </div>
+
+    
+   <!--  <div class="field">
+        <label for="status">Inventory Status</label>
+        <p-dropdown [(ngModel)]="product.inventoryStatus" inputId="inventoryStatus" optionValue="label" [options]="statuses" placeholder="Select">
+            <ng-template pTemplate="selectedItem">
+                <span *ngIf="product && product.inventoryStatus" [class]="'product-badge status-' + product.inventoryStatus.toString().toLowerCase()">{{product.inventoryStatus}}</span>
+            </ng-template>
+            <ng-template let-option pTemplate="item">
+                <span [class]="'product-badge status-' + option.value">{{option.label}}</span>
+            </ng-template>
+        </p-dropdown>
+    </div>
+-->
+
+    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-raised p-button-secondary"></button>
+    <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-raised"></button>
+</div>

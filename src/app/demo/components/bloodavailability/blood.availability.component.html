@@ -1,8 +1,9 @@
     <div class="grid"><div class="col-12">
 		<p-toast key="tst"></p-toast>
+		<p-tabMenu styleClass="mb-5" [model]="menuItems" *ngIf="hospitalId" [activeItem]="activeItem" (activeItemChange)="onActiveItemChange($event)"></p-tabMenu>
 		<div class="card">
 			<h5>Blood Availability List</h5>
-			<p-table #dt1 [value]="bloodAvailabilityList" dataKey="itemId" [rows]="10" [loading]="loading" [rowHover]="true" styleClass="p-datatable-gridlines" [paginator]="true" [globalFilterFields]="['hospitalName','bloodGroup']" responsiveLayout="scroll">
+			<p-table #dt1 [value]="bloodAvailabilFilterList" dataKey="itemId" [rows]="10" [loading]="loading" [rowHover]="true" styleClass="p-datatable-gridlines" [paginator]="true" [globalFilterFields]="['hospitalName','bloodGroup']" responsiveLayout="scroll">
 				<ng-template pTemplate="caption">
 					<div class="flex justify-content-between flex-column sm:flex-row">
 						<button pButton label="Clear" class="p-button-outlined mb-2" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
@@ -17,18 +18,18 @@
 						<th style="min-width: 12rem" pSortableColumn="hospitalName">
 							<div class="flex justify-content-between align-items-center">
 								Hospital Name
-                                <p-sortIcon field="hospitalName"></p-sortIcon>
+								<p-sortIcon field="hospitalName"></p-sortIcon>
 								<p-columnFilter type="text" field="hospitalName" display="menu" placeholder="Search by Hospital name"></p-columnFilter>
 							</div>
 						</th>
 						<th style="min-width: 12rem" pSortableColumn="bloodGroup">
 							<div class="flex justify-content-between align-items-center">
 								Blood Group
-                                <p-sortIcon field="bloodGroup"></p-sortIcon>
+								<p-sortIcon field="bloodGroup"></p-sortIcon>
 								<p-columnFilter type="text" field="bloodGroup" display="menu" placeholder="Search by BloodGroup"></p-columnFilter>
 							</div>
 						</th>
-                        <th style="min-width: 12rem" pSortableColumn="AvailableUnit">
+						<th style="min-width: 12rem" pSortableColumn="AvailableUnit">
 							<div class="flex justify-content-between align-items-center">
 								Available Unit
 								<p-sortIcon field="AvailableUnit"></p-sortIcon>
@@ -42,10 +43,10 @@
 						<td>
 							{{bloodAvailability.hospitalName}}
 						</td>
-                        <td>
+						<td>
 							{{bloodAvailability.bloodGroup}}
 						</td>
-                        <td>
+						<td>
 							{{bloodAvailability.AvailableUnit}}
 						</td>
 						<td><p-button type="button" *ngIf="bloodAvailability.hospitalId !== hospitalId"
@@ -54,9 +55,6 @@
                     
 				</ng-template>
 
-                
-
-               
 				<ng-template pTemplate="emptymessage">
 					<tr>
 						<td colspan="8">No Blood found.</td>
@@ -67,9 +65,8 @@
 						<td colspan="8">Loading Blood Availability data. Please wait.</td>
 					</tr>
 				</ng-template>
-    		</p-table>
+			</p-table>
 		</div>
-
 	</div>
 
 

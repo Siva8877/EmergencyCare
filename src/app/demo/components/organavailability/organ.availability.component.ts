@@ -6,6 +6,7 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { Table } from 'primeng/table';
 import { DropdownModule } from 'primeng/dropdown';
 import { Router } from '@angular/router';
+import { MenuItem } from 'primeng/api';
 @Component({
     templateUrl: './organ.availability.component.html',
     providers: [MessageService]
@@ -22,6 +23,7 @@ export class OrganAvailabilityComponent implements OnInit, OnDestroy {
     hospitalDataList: any[] = [];
     filteredHospitalList: any[] = [];
     selectedHospital  = '';
+    selectedTab  = 0;
     organAvailabilityList: any[] = [];
     allOrganAvailabilityList: any[] = [];
     activityValues: number[] = [0, 100];
@@ -29,6 +31,9 @@ export class OrganAvailabilityComponent implements OnInit, OnDestroy {
     liverWeightRange: number[] = [500, 2500];
     heartWeightRange: number[] = [200, 400];
     hospitalId = '';
+    menuItems: MenuItem[];
+
+    activeItem: MenuItem;
     @ViewChild('filter') filter!: ElementRef;
     constructor(private hospitalService: HospitalService, public layoutService: LayoutService, private service: MessageService, private router: Router) {
         this.organList = [
@@ -48,7 +53,12 @@ export class OrganAvailabilityComponent implements OnInit, OnDestroy {
             localStorage.setItem('name', '');
             this.router.navigate(['/login']);
         }
-
+        this.menuItems = [
+            { label: 'My Hospital',id : '0'},
+            { label: 'Other Hospital',id : '1' }
+        ];
+        
+        this.activeItem = this.menuItems[0];
     }
 
     ngOnInit() {
@@ -73,7 +83,16 @@ export class OrganAvailabilityComponent implements OnInit, OnDestroy {
                     }
                 });
             }
-            this.organAvailabilityList = this.allOrganAvailabilityList;
+            
+            if(this.hospitalId){
+                
+                this.activeItem = this.menuItems[0];
+                this.selectedTab = 0;
+                this.organAvailabilityList = this.allOrganAvailabilityList.filter(obj=> obj.hospitalId === this.hospitalId);
+            }else{
+                this.organAvailabilityList = this.allOrganAvailabilityList;
+            }
+           
         });
     }
 
@@ -103,6 +122,15 @@ export class OrganAvailabilityComponent implements OnInit, OnDestroy {
         } else {
             this.organAvailabilityList = this.allOrganAvailabilityList;
         }
+        if(this.hospitalId){
+            if(this.selectedTab === 0){
+                this.organAvailabilityList = this.organAvailabilityList.filter(obj=> obj.hospitalId === this.hospitalId);
+
+            }else if(this.selectedTab === 1){
+                this.organAvailabilityList = this.organAvailabilityList.filter(obj=> obj.hospitalId !== this.hospitalId);
+
+            }
+        }
 
     }
 
@@ -118,5 +146,18 @@ export class OrganAvailabilityComponent implements OnInit, OnDestroy {
     onSendRequestClick(){
         this.showOrganRequestDialog = false;
         this.service.add({ key: 'tst', severity: 'success', summary: 'Success Message', detail: 'Successfully Requested for Organ.' });
+    }
+
+
+    onActiveItemChange(event: any) {
+        this.selectedOrgan = 'ALL';
+        this.activeItem = event;
+        if (event.id === '0') {
+            this.selectedTab = 0;
+            this.organAvailabilityList = this.allOrganAvailabilityList.filter(obj=> obj.hospitalId === this.hospitalId);
+        } else if (event.id === '1') {
+            this.selectedTab = 1;
+            this.organAvailabilityList = this.allOrganAvailabilityList.filter(obj=> obj.hospitalId !== this.hospitalId);
+        }
     }
 }

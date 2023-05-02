@@ -26,6 +26,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { OrganAvailabilityRoutingModule } from './organ.availability-routing.module';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { TabMenuModule } from 'primeng/tabmenu';
+import { TabViewModule } from 'primeng/tabview';
 @NgModule({
     imports: [
         CommonModule,
@@ -52,7 +53,8 @@ import { TabMenuModule } from 'primeng/tabmenu';
         InputNumberModule,
         TabMenuModule,
         MessagesModule,
-		MessageModule
+		MessageModule,
+        TabViewModule
     ],
     declarations: [OrganAvailabilityComponent]
 })

@@ -45,9 +45,6 @@ export class AppLayoutComponent implements OnDestroy {
                 });
             }
 
-            if (this.layoutService.state.staticMenuMobileActive) {
-                this.blockBodyScroll();
-            }
         });
 
         this.router.events.pipe(filter(event => event instanceof NavigationEnd))
@@ -55,6 +52,17 @@ export class AppLayoutComponent implements OnDestroy {
                 this.hideMenu();
                 this.hideProfileMenu();
             });
+            
+            if (this.layoutService.state.staticMenuMobileActive) {
+                this.blockBodyScroll();
+            }
+            if (!localStorage.getItem('userId') || !localStorage.getItem('role')) {
+                localStorage.setItem('userId', '');
+                localStorage.setItem('password', '');
+                localStorage.setItem('role', '');
+                localStorage.setItem('name', '');
+                this.router.navigate(['/login']);
+            } 
     }
 
     hideMenu() {

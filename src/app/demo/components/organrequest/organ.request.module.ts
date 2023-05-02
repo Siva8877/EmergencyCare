@@ -23,6 +23,7 @@ import { DialogModule } from 'primeng/dialog';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { OrganRequestRoutingModule } from './organ.request-routing.module';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { TabViewModule } from 'primeng/tabview';
 import { TabMenuModule } from 'primeng/tabmenu';
 @NgModule({
     imports: [
@@ -48,7 +49,8 @@ import { TabMenuModule } from 'primeng/tabmenu';
         DialogModule,
         InputTextareaModule,
         InputNumberModule,
-        TabMenuModule
+        TabMenuModule,
+        TabViewModule
     ],
     declarations: [OrganRequestComponent]
 })

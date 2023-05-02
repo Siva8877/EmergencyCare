@@ -24,6 +24,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { BloodRequestRoutingModule } from './blood.request-routing.module';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { TabMenuModule } from 'primeng/tabmenu';
+import { TabViewModule } from 'primeng/tabview';
 @NgModule({
     imports: [
         CommonModule,
@@ -48,7 +49,8 @@ import { TabMenuModule } from 'primeng/tabmenu';
         DialogModule,
         InputTextareaModule,
         InputNumberModule,
-        TabMenuModule
+        TabMenuModule,
+        TabViewModule
     ],
     declarations: [BloodRequestComponent]
 })

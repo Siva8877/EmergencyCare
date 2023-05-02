@@ -8,7 +8,8 @@ import { AppLayoutComponent } from "./layout/app.layout.component";
         RouterModule.forRoot([
             {
                 path: '', component: AppLayoutComponent,
-                children: [
+                children: [                  
+                    { path: 'hospitaldetail', loadChildren: () => import('./demo/components/hospitaldetail/hospital.detail.module').then(m => m.HospitalDetailModule) },
                     { path: 'hospital', loadChildren: () => import('./demo/components/hospital/hospital.module').then(m => m.HospitalModule) },
                     { path: 'bloodlist', loadChildren: () => import('./demo/components/bloodavailability/blood.availability.module').then(m => m.BloodAvailabilityModule) },
                     { path: 'bloodrequest', loadChildren: () => import('./demo/components/bloodrequest/blood.request.module').then(m => m.BloodRequestModule) },
@@ -22,6 +23,7 @@ import { AppLayoutComponent } from "./layout/app.layout.component";
                     { path: 'pages', loadChildren: () => import('./demo/components/pages/pages.module').then(m => m.PagesModule) }
                 ]
             },
+            { path: '', loadChildren: () => import('./demo/components/auth/login/login.module').then(m => m.LoginModule) },
             { path: 'login', loadChildren: () => import('./demo/components/auth/login/login.module').then(m => m.LoginModule) },
             { path: 'auth', loadChildren: () => import('./demo/components/auth/auth.module').then(m => m.AuthModule) },
             { path: 'landing', loadChildren: () => import('./demo/components/landing/landing.module').then(m => m.LandingModule) },

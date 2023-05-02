@@ -1,7 +1,7 @@
 <div class="grid">
 	<p-toast key="tst"></p-toast>
 	<div class="col-12">
-
+		<p-tabMenu styleClass="mb-5" [model]="menuItems" *ngIf="hospitalId" [activeItem]="activeItem" (activeItemChange)="onActiveItemChange($event)"></p-tabMenu>
 		<div class="card">
 			<h5>Organ Availability List</h5>
 			<p-table #dt1 [value]="organAvailabilityList" dataKey="itemId" [rows]="10" [loading]="loading"

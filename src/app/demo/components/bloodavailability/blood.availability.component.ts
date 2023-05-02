@@ -5,6 +5,7 @@ import { Message, MessageService } from 'primeng/api';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { Table } from 'primeng/table';
 import { Router } from '@angular/router';
+import { MenuItem } from 'primeng/api';
 @Component({
     templateUrl: './blood.availability.component.html',
     providers: [MessageService]
@@ -22,12 +23,17 @@ export class BloodAvailabilityComponent implements OnInit, OnDestroy {
     selectedBloodAvailability = 0;
     hospitalBloodDataList: any[] = [];
     bloodAvailabilityList : any[] = [];
+    bloodAvailabilMyHosList : any[] = [];
+    bloodAvailabilFilterList : any[] = [];
     activityValues: number[] = [0, 100];
     tempratureValue: number[] = [90, 110];
     heartBeatValue: number[] = [30, 150];
     respRateValue: number[] = [5, 30];
     oxygenRateValue: number[] = [50, 150];
     hospitalId = '';
+    menuItems: MenuItem[];
+
+    activeItem: MenuItem;
     @ViewChild('filter') filter!: ElementRef;
     constructor(private hospitalService: HospitalService, public layoutService: LayoutService,
         private service: MessageService, private router: Router) {
@@ -42,12 +48,19 @@ export class BloodAvailabilityComponent implements OnInit, OnDestroy {
             localStorage.setItem('name', '');
             this.router.navigate(['/login']);
         }
+        this.menuItems = [
+            { label: 'My Hospital',id : '0'},
+            { label: 'Other Hospital',id : '1' }
+        ];
+        this.activeItem = this.menuItems[0];
     }
 
     ngOnInit() {
         this.hospitalService.getBloodAvailabilityList().then(hosBloodData => {
             this.hospitalBloodDataList = hosBloodData;
             this.bloodAvailabilityList = [];
+            this.bloodAvailabilMyHosList = [];
+            this.bloodAvailabilFilterList = [];
             this.loading = false;
             if (this.hospitalBloodDataList && Array.isArray(this.hospitalBloodDataList)
                 && this.hospitalBloodDataList.length) {
@@ -64,6 +77,11 @@ export class BloodAvailabilityComponent implements OnInit, OnDestroy {
                         }
                     }
                 });
+            }
+            if (this.hospitalId) {
+                this.bloodAvailabilFilterList = this.bloodAvailabilityList.filter(obj => obj.hospitalId === this.hospitalId);
+            } else {
+                this.bloodAvailabilFilterList = this.bloodAvailabilityList;
             }
         });
     }
@@ -99,6 +117,15 @@ export class BloodAvailabilityComponent implements OnInit, OnDestroy {
         this.showBloodRequestDialog = false;
         this.service.add({ key: 'tst', severity: 'success', summary: 'Success Message', detail: 'Successfully Requested for Blood.' });
         //this.service.add({ key: 'tst', severity: 'success', summary: 'Success Message', detail: 'Successfully Requested for Organ.' });
+    }
+
+    onActiveItemChange(event: any){
+        this.activeItem = event;
+        if (event.id === '0') {
+            this.bloodAvailabilFilterList = this.bloodAvailabilityList.filter(obj => obj.hospitalId === this.hospitalId);
+        } else if (event.id === '1') {
+            this.bloodAvailabilFilterList = this.bloodAvailabilityList.filter(obj => obj.hospitalId !== this.hospitalId);
+        }
     }
    
 }

@@ -1,5 +1,5 @@
 
-import { BloodAvailabilityComponent } from './blood.availability.component';
+import { HospitalDetailComponent } from './hospital.detail.component';
 import { ChartModule } from 'primeng/chart';
 import { MenuModule } from 'primeng/menu';
 import { StyleClassModule } from 'primeng/styleclass';
@@ -14,6 +14,8 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
 import { RippleModule } from 'primeng/ripple';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { DropdownModule } from 'primeng/dropdown';
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { ToastModule } from 'primeng/toast';
 import { SliderModule } from 'primeng/slider';
@@ -21,11 +23,9 @@ import { RatingModule } from 'primeng/rating';
 import { ToolbarModule } from 'primeng/toolbar';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextareaModule } from 'primeng/inputtextarea';
-import { BloodAvailabilityRoutingModule } from './blood.availability-routing.module';
+import { HospitalDetailRoutingModule } from './hospital.detail-routing.module';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { TabMenuModule } from 'primeng/tabmenu';
-import { MessagesModule } from 'primeng/messages';
-import { MessageModule } from 'primeng/message';
 import { TabViewModule } from 'primeng/tabview';
 @NgModule({
     imports: [
@@ -37,7 +37,7 @@ import { TabViewModule } from 'primeng/tabview';
         StyleClassModule,
         PanelMenuModule,
         ButtonModule,
-        BloodAvailabilityRoutingModule,
+        HospitalDetailRoutingModule,
         InputTextModule,
 		ToggleButtonModule,
 		RippleModule,
@@ -53,9 +53,9 @@ import { TabViewModule } from 'primeng/tabview';
         InputNumberModule,
         TabMenuModule,
         MessagesModule,
-        MessageModule,
+		MessageModule,
         TabViewModule
     ],
-    declarations: [BloodAvailabilityComponent]
+    declarations: [HospitalDetailComponent]
 })
-export class BloodAvailabilityModule { }
+export class HospitalDetailModule { }
